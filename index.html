@@ -106,7 +106,7 @@
     }
 
     .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .nav-logo img { height: 30px; filter: brightness(0) invert(1); opacity: 0.88; }
+    .nav-logo img { height: 52px; }
 
     .nav-links {
       display: flex;
@@ -576,6 +576,112 @@
     }
     .svg-hint.hidden { opacity: 0; }
 
+    /* ---- MAP POPUP — GDP CHART ---- */
+    .map-popup {
+      position: absolute;
+      left: 1076px;
+      top: 280px;
+      z-index: 20;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .map-popup-trigger {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px 8px 12px;
+      background: #ffffff;
+      border: 1.5px solid #D85A30;
+      border-radius: 999px;
+      color: #D85A30;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      transition: background 0.18s, box-shadow 0.18s;
+    }
+    .map-popup-trigger:hover {
+      background: #fff5f2;
+      box-shadow: 0 4px 18px rgba(216,90,48,0.18);
+    }
+    .map-popup-trigger svg { flex-shrink: 0; }
+
+    .map-popup-card {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 400px;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.16);
+      overflow: hidden;
+      transform-origin: top left;
+      transform: scale(0.92);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.22s cubic-bezier(.4,0,.2,1), opacity 0.22s;
+    }
+    .map-popup-card.open {
+      transform: scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .map-popup-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 18px 18px 0;
+    }
+    .map-popup-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1c1c1a;
+      line-height: 1.2;
+    }
+    .map-popup-sub {
+      font-size: 11px;
+      color: #888;
+      margin-top: 2px;
+    }
+    .map-popup-close {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: #aaa;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 0 0 8px;
+      transition: color 0.15s;
+    }
+    .map-popup-close:hover { color: #333; }
+    .map-popup-legend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 12px;
+      padding: 14px 18px 10px;
+    }
+    .map-popup-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      color: #444;
+      line-height: 1.3;
+    }
+    .map-popup-swatch {
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .map-popup-val { color: #888; }
+    .map-popup-chart-wrap {
+      padding: 0 18px 18px;
+      height: 210px;
+      position: relative;
+    }
+
     .africa-pills {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -693,6 +799,14 @@
       text-align: center;
     }
     .sym-card .sym { font-size: 28px; margin-bottom: 10px; display: block; }
+    .sym-card .sym-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      display: block;
+    }
     .sym-card h5 {
       font-size: 11px;
       font-weight: 700;
@@ -1100,6 +1214,78 @@
     .final-card .brl { font-size: 13px; color: var(--muted); }
     .final-card .brl strong { color: var(--text); }
 
+    /* Profit slider */
+    .profit-slider-wrap {
+      margin-top: 32px;
+      padding: 28px 32px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--rsm);
+    }
+    .ps-header { margin-bottom: 20px; }
+    .ps-title {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .ps-desc { font-size: 12px; color: var(--muted); }
+    .ps-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .ps-pct {
+      font-family: var(--fm);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1;
+    }
+    #profitSlider {
+      width: 100%;
+      accent-color: #AADF6A;
+      cursor: pointer;
+      height: 4px;
+    }
+    .ps-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted2);
+      margin-top: 7px;
+    }
+    .sell-price-row {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .sell-lbl {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 7px;
+    }
+    .sell-amt {
+      display: block;
+      font-family: var(--fm);
+      font-size: clamp(18px, 2.5vw, 28px);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .final-card.solar .sell-amt { color: var(--cyan); }
+    .final-card.wind  .sell-amt { color: var(--green); }
+    .sell-brl { font-size: 12px; color: var(--muted); }
+
     .disclaimer {
       margin-top: 28px;
       padding: 22px 26px;
@@ -1201,7 +1387,7 @@
 ================================================================ -->
 <nav id="nav">
   <a href="#hero" class="nav-logo">
-    <img src="assets/text-logo.png" alt="Airmanzi">
+    <img src="Airmanzi-logo-white.png" alt="Airmanzi">
   </a>
   <ul class="nav-links">
     <li><a href="#contexto">Contexto</a></li>
@@ -1336,6 +1522,27 @@
         <span class="svg-hint" id="svgHint">Scroll para zoom · Arrastar para navegar</span>
         <div class="svg-canvas" id="svgCanvas">
           <img src="geografia mapa mental.svg" id="svgImg" draggable="false" alt="Mapa mental — África do Sul">
+          <div class="map-popup" id="gdpPopup">
+            <button class="map-popup-trigger" id="gdpTrigger">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 20V10M12 20V4M6 20v-6"/>
+              </svg>
+              PIB por Setor
+            </button>
+            <div class="map-popup-card" id="gdpCard">
+              <div class="map-popup-head">
+                <div>
+                  <div class="map-popup-title">Composição do PIB da África do Sul</div>
+                  <div class="map-popup-sub">Participação de cada setor no Produto Interno Bruto</div>
+                </div>
+                <button class="map-popup-close" id="gdpClose">×</button>
+              </div>
+              <div class="map-popup-legend" id="gdpLegend"></div>
+              <div class="map-popup-chart-wrap">
+                <canvas id="gdpDonut"></canvas>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="svg-controls">
           <button class="svg-ctrl-btn" id="zoomInBtn" title="Zoom in">
@@ -1414,12 +1621,12 @@
         </div>
         <div class="sym-pair">
           <div class="sym-card r d3">
-            <span class="sym">🌸</span>
+            <img class="sym-photo" src="protea.webp" alt="Protea-Rei — flor nacional da África do Sul">
             <h5>Protea-Rei</h5>
             <p>Uma flor natural da África do Sul e um símbolo de esperança por ser resistente ao fogo.</p>
           </div>
           <div class="sym-card r d4">
-            <span class="sym">🕊️</span>
+            <img class="sym-photo" src="grau.webp" alt="Grou-azul (INdwe) — ave nacional da África do Sul">
             <h5>INdwe</h5>
             <p>Grou-azul — nos idiomas isiXhosa e isiZulu está associado a um dos prêmios de honra de algumas tribos.</p>
           </div>
@@ -1738,14 +1945,40 @@
     <!-- Final totals -->
     <div class="final-totals r">
       <div class="final-card solar">
-        <span class="lbl">Preço final estimado — INdwe Solar (com impostos)</span>
+        <span class="lbl">Custo total estimado — INdwe Solar (com impostos)</span>
         <span class="amt">R 1.488.500</span>
         <span class="brl">Aproximadamente <strong>~R$ 446 mil</strong></span>
+        <div class="sell-price-row">
+          <span class="sell-lbl">Preço de venda (<span class="sp-pct">20%</span> de lucro)</span>
+          <span class="sell-amt" id="sellSolar">R 1.786.200</span>
+          <span class="sell-brl" id="sellSolarBrl">~R$ 535 mil</span>
+        </div>
       </div>
       <div class="final-card wind">
-        <span class="lbl">Preço final estimado — INdwe Eólica (com impostos)</span>
+        <span class="lbl">Custo total estimado — INdwe Eólica (com impostos)</span>
         <span class="amt">R 1.701.500</span>
         <span class="brl">Aproximadamente <strong>~R$ 510 mil</strong></span>
+        <div class="sell-price-row">
+          <span class="sell-lbl">Preço de venda (<span class="sp-pct">20%</span> de lucro)</span>
+          <span class="sell-amt" id="sellWind">R 2.041.800</span>
+          <span class="sell-brl" id="sellWindBrl">~R$ 612 mil</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profit margin slider -->
+    <div class="profit-slider-wrap r">
+      <div class="ps-header">
+        <span class="ps-title">Calculadora de Preço de Venda</span>
+        <span class="ps-desc">Ajuste a margem de lucro aplicada sobre o custo total com impostos</span>
+      </div>
+      <div class="ps-label-row">
+        <span>Margem de Lucro</span>
+        <span class="ps-pct" id="profitPct">20%</span>
+      </div>
+      <input type="range" id="profitSlider" min="0" max="100" value="20" step="1">
+      <div class="ps-ticks">
+        <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
       </div>
     </div>
 
@@ -2046,6 +2279,125 @@
       if (t < 1) requestAnimationFrame(tick);
     })(start);
   }
+
+  /* ----- PROFIT SLIDER ----- */
+  (function () {
+    const slider      = document.getElementById('profitSlider');
+    const pctDisplay  = document.getElementById('profitPct');
+    const spPcts      = document.querySelectorAll('.sp-pct');
+    const sellSolar   = document.getElementById('sellSolar');
+    const sellSolarBrl= document.getElementById('sellSolarBrl');
+    const sellWind    = document.getElementById('sellWind');
+    const sellWindBrl = document.getElementById('sellWindBrl');
+
+    const SOLAR_BASE = 1488500;
+    const WIND_BASE  = 1701500;
+    const BRL_RATE   = 0.30;
+
+    function fmt(n) {
+      return 'R ' + Math.round(n).toLocaleString('pt-BR');
+    }
+    function fmtBrl(n) {
+      const brl = n * BRL_RATE;
+      return '~R$ ' + Math.round(brl / 1000) + ' mil';
+    }
+
+    function update() {
+      const pct  = parseInt(slider.value, 10);
+      const mult = 1 + pct / 100;
+      pctDisplay.textContent = pct + '%';
+      spPcts.forEach(el => el.textContent = pct + '%');
+      sellSolar.textContent    = fmt(SOLAR_BASE * mult);
+      sellSolarBrl.textContent = fmtBrl(SOLAR_BASE * mult);
+      sellWind.textContent     = fmt(WIND_BASE * mult);
+      sellWindBrl.textContent  = fmtBrl(WIND_BASE * mult);
+    }
+
+    slider.addEventListener('input', update);
+    update();
+  })();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+  /* ----- GDP POPUP CHART ----- */
+  (function () {
+    const sectors = [
+      { label: "Finanças e serv. empresariais", value: 21.6, color: "#378ADD" },
+      { label: "Serviços governamentais",        value: 17.0, color: "#534AB7" },
+      { label: "Comércio, hotelaria e alimentos",value: 15.0, color: "#1D9E75" },
+      { label: "Manufatura",                     value: 13.9, color: "#D85A30" },
+      { label: "Transporte e comunicações",      value:  9.3, color: "#BA7517" },
+      { label: "Mineração",                      value:  8.3, color: "#888780" },
+      { label: "Outros serviços",                value: 11.7, color: "#D4537E" },
+      { label: "Agricultura",                    value:  2.6, color: "#639922" }
+    ];
+
+    const fmt = n => n.toFixed(1).replace(".", ",") + "%";
+
+    const legendEl = document.getElementById("gdpLegend");
+    legendEl.innerHTML = sectors.map(s =>
+      `<span class="map-popup-legend-item">
+        <span class="map-popup-swatch" style="background:${s.color}"></span>
+        <span>${s.label} <span class="map-popup-val">${fmt(s.value)}</span></span>
+       </span>`
+    ).join("");
+
+    let chartInited = false;
+    function initChart() {
+      if (chartInited) return;
+      chartInited = true;
+      new Chart(document.getElementById("gdpDonut"), {
+        type: "doughnut",
+        data: {
+          labels: sectors.map(s => s.label),
+          datasets: [{
+            data: sectors.map(s => s.value),
+            backgroundColor: sectors.map(s => s.color),
+            borderWidth: 2,
+            borderColor: "#ffffff"
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "58%",
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: { label: c => " " + c.label + ": " + fmt(c.parsed) }
+            }
+          }
+        }
+      });
+    }
+
+    const trigger = document.getElementById("gdpTrigger");
+    const card    = document.getElementById("gdpCard");
+    const closeBtn= document.getElementById("gdpClose");
+    const popup   = document.getElementById("gdpPopup");
+
+    function open() {
+      card.classList.add("open");
+      initChart();
+    }
+    function close() {
+      card.classList.remove("open");
+    }
+
+    trigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      card.classList.contains("open") ? close() : open();
+    });
+    closeBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      close();
+    });
+
+    /* prevent popup drag from panning the map */
+    popup.addEventListener("mousedown", function (e) { e.stopPropagation(); });
+    popup.addEventListener("touchstart", function (e) { e.stopPropagation(); }, { passive: true });
+  })();
 </script>
 
 </body>

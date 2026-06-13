@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Mental — África do Sul · Airmanzi</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #f8f7f4; }
+    #root { width: 100%; height: 100%; }
+    .loading {
+      position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: #f8f7f4; flex-direction: column; gap: 16px;
+      font-family: system-ui; color: #555; font-size: 14px;
+    }
+    .spinner {
+      width: 32px; height: 32px; border: 2px solid #ddd;
+      border-top-color: #6B9E6E; border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <span>Carregando mapa mental…</span>
+  </div>
+  <div id="root"></div>
+
+  <script type="module">
+    // Load Excalidraw via CDN (React 18 + Excalidraw)
+    const REACT_URL = 'https://esm.sh/react@18';
+    const REACT_DOM_URL = 'https://esm.sh/react-dom@18/client';
+    const EXCALIDRAW_URL = 'https://esm.sh/@excalidraw/excalidraw@0.17.6';
+
+    async function init() {
+      try {
+        const [React, { createRoot }, { Excalidraw }] = await Promise.all([
+          import(REACT_URL),
+          import(REACT_DOM_URL),
+          import(EXCALIDRAW_URL),
+        ]);
+
+        const resp = await fetch('Geografia.excalidraw');
+        const data = await resp.json();
+
+        // Filter only Africa do Sul content (elements after the school content)
+        // We render everything but scroll to the Africa do Sul section
+        const root = createRoot(document.getElementById('root'));
+
+        function App() {
+          const [api, setApi] = React.useState(null);
+
+          React.useEffect(() => {
+            if (api) {
+              // Center view after load
+              setTimeout(() => {
+                api.scrollToContent(undefined, { animate: true, zoom: 0.8 });
+              }, 300);
+            }
+          }, [api]);
+
+          return React.createElement(Excalidraw, {
+            excalidrawAPI: setApi,
+            initialData: {
+              elements: data.elements,
+              appState: {
+                viewBackgroundColor: '#f8f7f4',
+                zoom: { value: 0.8 },
+                theme: 'light',
+              },
+              scrollToContent: true,
+            },
+            viewModeEnabled: true,
+            zenModeEnabled: false,
+            gridModeEnabled: false,
+          });
+        }
+
+        root.render(React.createElement(App));
+        document.getElementById('loading').style.display = 'none';
+      } catch (err) {
+        document.getElementById('loading').innerHTML = `
+          <div style="text-align:center; padding: 40px; max-width: 500px;">
+            <div style="font-size:32px; margin-bottom:16px;">🗺️</div>
+            <strong style="display:block; margin-bottom:12px; font-size:16px; color:#333;">Mapa Mental — África do Sul</strong>
+            <p style="color:#666; line-height:1.6; font-size:14px;">
+              O mapa mental requer conexão à internet para carregar o visualizador Excalidraw.<br><br>
+              <strong>Tópicos cobertos:</strong> Cultura · Filosofia Ubuntu · 11 Idiomas ·
+              Economia · Escassez de Água · Precariedade Energética · Aquíferos Subterrâneos.
+            </p>
+            <div style="margin-top:24px; display:grid; gap:10px; text-align:left;">
+              ${[
+                ['Cultura', '11 idiomas oficiais, Filosofia Ubuntu ("Eu sou porque nós somos"), Braai — churrasco sul-africano como instituição nacional'],
+                ['Economia', 'Segunda maior economia da África. Base produtiva diversificada: mineração, agricultura, manufatura e serviços'],
+                ['Escassez de Água', 'Poucas fontes de água doce dificultam abastecimento da população e da agricultura e pecuária'],
+                ['Precariedade Energética', 'Hidrelétricas inviáveis, eólica convencional consome muito espaço — gap a ser preenchido pela Airmanzi'],
+              ].map(([t, d]) => `
+                <div style="padding:14px; background:#fff; border-radius:10px; border:1px solid #e8e8e8;">
+                  <strong style="color:#333; font-size:13px; display:block; margin-bottom:4px;">${t}</strong>
+                  <span style="color:#666; font-size:12px; line-height:1.5;">${d}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

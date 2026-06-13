@@ -181,8 +181,19 @@
     /* Camada 1 — fundo (mais longe, move menos) */
     #px-bg    { z-index: 1; }
 
-    /* Camada 2 — texto e símbolos (meio) */
-    #px-txt   { z-index: 2; }
+    /* Camada 2 — texto e símbolos (meio): contido e menor */
+    #px-txt {
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #px-txt img {
+      object-fit: contain;
+      width: 62%;
+      height: auto;
+      max-height: 75%;
+    }
 
     /* Camada 3 — INdwe recortado (frente, move mais) */
     #px-indwe { z-index: 3; }

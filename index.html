@@ -1345,6 +1345,84 @@
     }
 
     /* ================================================================
+       SECTION 6 — APRESENTAÇÃO (video + bilingual text)
+    ================================================================ */
+    #apresentacao {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 60%, var(--bg) 100%);
+    }
+
+    .apres-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .apres-text-col {}
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--fm);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 20px;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .lang-btn.active {
+      background: var(--green);
+      color: #04080B;
+      font-weight: 600;
+    }
+
+    .apres-body {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.80;
+    }
+
+    .apres-body .hidden { display: none; }
+
+    .apres-video-col {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .yt-shell {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 72px rgba(0,0,0,0.55);
+      border: 1px solid var(--border);
+    }
+
+    .yt-shell iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ================================================================
        RESPONSIVE
     ================================================================ */
     @media (max-width: 960px) {
@@ -1354,7 +1432,10 @@
       .scroll-cue { left: 24px; }
       .contexto-grid,
       .sobre-layout,
+      .apres-grid,
       .indwe-intro-grid { grid-template-columns: 1fr; gap: 44px; }
+      .apres-video-col { order: -1; }
+      .yt-shell { max-width: 280px; }
       .africa-pills { grid-template-columns: 1fr 1fr; }
       .feat-cards,
       .cost-pair,
@@ -1395,7 +1476,9 @@
     <li><a href="#airmanzi">A Empresa</a></li>
     <li><a href="#indwe">INdwe</a></li>
     <li><a href="#sistema">Sistema</a></li>
+    <li><a href="#apresentacao">INdwe</a></li>
     <li><a href="#custos">Orçamento</a></li>
+    <li><a href="https://drive.google.com/drive/folders/1PJXYx8dVV6wezagJNgHrYNFgZhpoNTI-?usp=drive_link" target="_blank" rel="noopener noreferrer">Material do Professor</a></li>
   </ul>
   <a href="#custos" class="nav-cta">Para Investidores</a>
 </nav>
@@ -1823,11 +1906,51 @@
 <div class="divider"></div>
 
 <!-- ================================================================
-     SECTION 6 — CUSTOS / ORÇAMENTO
+     SECTION 6 — APRESENTAÇÃO INdwe (vídeo + texto bilíngue)
+================================================================ -->
+<section id="apresentacao" class="s-wrap">
+  <div class="container">
+    <div class="apres-grid">
+
+      <div class="apres-text-col">
+        <div class="s-label r">06 — Apresentação</div>
+        <h2 class="hed r d1"><em>INdwe</em><br>em Ação</h2>
+
+        <div class="lang-toggle r d2">
+          <button class="lang-btn active" id="btnPT" onclick="switchLang('pt')">PT</button>
+          <button class="lang-btn" id="btnEN" onclick="switchLang('en')">EN</button>
+        </div>
+
+        <div class="apres-body r d3">
+          <p id="textPT">Acaba de chegar na África do Sul o INdwe, as torres de agricultura que vão alimentar o povo Sul africano. Imagina acordar de manhã e não precisar se preocupar em ir á feira ou com as contas de casa? Basta ir ao seu INdwe e colher a safra fresquinha de legumes do dia que servirão para alimentar você, sua família, e todos os seus clientes. Você não precisa se preocupar em regar, fazer controle de pragas nem se preocupar se o clima está ou não favorável… Finalmente vocé pode consumir e gerar renda sem retrabalho ou preocupacões. Adiquira ja o seu INdwe!</p>
+          <p id="textEN" class="hidden">The INdwe, the agricultural towers that will feed the South African people, has just arrived in South Africa. Imagine waking up in the morning and not having to worry about going to the market or paying household bills? Just go to your INdwe and harvest the fresh crop of vegetables that will feed you, your family, and all your customers. You don't need to worry about watering, pest control, or whether the weather is favorable or not… Finally, you can consume and generate income without rework or worries. Get your INdwe now!</p>
+        </div>
+      </div>
+
+      <div class="apres-video-col r d2">
+        <div class="yt-shell">
+          <iframe
+            src="https://www.youtube.com/embed/8WeGW0oP1DE"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            title="INdwe — Apresentação">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================================================================
+     SECTION 7 — CUSTOS / ORÇAMENTO
 ================================================================ -->
 <section id="custos" class="s-wrap">
   <div class="container">
-    <div class="s-label r">06 — Orçamento</div>
+    <div class="s-label r">07 — Orçamento</div>
     <h2 class="hed r d1">Custos e<br><em>Tributação</em> INdwe</h2>
     <p class="lead r d2">
       Estimativa conceitual para fabricação, montagem, instalação e tributação de torres
@@ -2114,6 +2237,13 @@
   revealEls.forEach(el => io.observe(el));
 
   /* ----- MAP EXPAND ----- */
+  function switchLang(lang) {
+    document.getElementById('textPT').classList.toggle('hidden', lang !== 'pt');
+    document.getElementById('textEN').classList.toggle('hidden', lang !== 'en');
+    document.getElementById('btnPT').classList.toggle('active', lang === 'pt');
+    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  }
+
   function toggleMap() {
     const shell = document.getElementById('mapShell');
     const btn   = document.getElementById('mapBtn');
